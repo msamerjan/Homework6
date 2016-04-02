@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Homework6</string>
+    <string name="fragment_login_button_text">Login</string>
+    <string name="fragment_user_button_text">Add user</string>
+    <string name="fragment_login_hint">Enter User Name</string>
+    <string name="sign_in">Username</string>
+    <string name="add_pin">Add Pin</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="new_user">New User</string>
+</resources>
