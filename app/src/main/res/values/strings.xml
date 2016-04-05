@@ -11,4 +11,6 @@
     <string name="main_activity">Main Activity</string>
     <string name="no_entry">No user entered</string>
     <string name="user_not_found">User not found</string>
+    <string name="fragment_login_image_description">The World</string>
+    <string name="duplicate_entry">Duplicate entry</string>
 </resources>

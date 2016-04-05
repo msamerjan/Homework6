@@ -3,6 +3,7 @@ package edu.lclark.homework6.SQLite;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -23,7 +24,7 @@ import static edu.lclark.homework6.SQLite.Pins._ID;
  */
 public class MapSQLiteHelper extends SQLiteOpenHelper{
     public static final String DB_NAME = "user.db";
-    private static final String TAG="Mapplication";
+    private static final String TAG="UpdateUser";
     private static MapSQLiteHelper sInstance;
 
 
@@ -76,12 +77,12 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
 
         db.beginTransaction();
         try {
-            // The user might already exist in the database (i.e. the same user created multiple posts).
+
             long userId = addOrUpdateUser(pin.getUser());
 
            ContentValues values= pin.getPinValues();
 
-            // Notice how we haven't specified the primary key. SQLite auto increments the primary key column.
+
             db.insertOrThrow(TABLE_NAME, null, values);
             db.setTransactionSuccessful();
         } catch (Exception e) {
@@ -127,10 +128,10 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
         return userId;
     }
 
-    public List<Pins> getAllPins() {
+    public List<Pins> getAllPins(int ID) {
         List<Pins> pins = new ArrayList<>();
 
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NAME + "WHERE " + Pins._ID + " = ?", new String[]{String.valueOf(ID)});
 
         if (cursor.moveToFirst()) {
 
@@ -138,8 +139,8 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
                 int id = getCursorInt(cursor, _ID);
                 String title = getCursorString(cursor, COL_TITLE);
                 String description = getCursorString(cursor, COL_DESCRIPTION);
-                String latitude=getCursorString(cursor, COL_LAT);
-                String longitude=getCursorString(cursor,COL_LONG);
+                int latitude=getCursorInt(cursor, COL_LAT);
+                int longitude=getCursorInt(cursor,COL_LONG);
                 pins.add(new Pins(latitude, longitude,id,title,description));
             } while (cursor.moveToNext());
 
@@ -147,45 +148,6 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
 
         cursor.close();
         return pins;
-    }
-
-
-
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE " + User.TABLE_NAME);
-        db.execSQL("DROP TABLE " + TABLE_NAME);
-        onCreate(db);
-    }
-
-    public String getCursorString(Cursor cursor, String columnName) {
-        return cursor.getString(cursor.getColumnIndex(columnName));
-    }
-
-    public int getCursorInt(Cursor cursor, String columnName) {
-        return cursor.getInt(cursor.getColumnIndex(columnName));
-    }
-
-    public void getPinsForUsers(){
-        String sql="SELECT"+User.COL_USER+", " + TABLE_NAME + ".* " +
-                "FROM " + TABLE_NAME + " INNER JOIN " + User.TABLE_NAME +
-                " ON " + TABLE_NAME + "." + COL_LAT + " LIKE " + User.TABLE_NAME + "." + User.COL_PINS;
-
-        Log.d("getPinsForUsers", sql);
-        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-
-        while (cursor.moveToNext()) {
-            String builder = getCursorString(cursor, User.COL_PINS) +
-                    " goes to " +
-                    getCursorString(cursor, COL_LAT) +
-                    " : " +
-                    getCursorString(cursor, COL_LONG);
-            Log.d("getPinsForUsers", builder);
-        }
-
-        cursor.close();
-
     }
 
     public ArrayList<User> getAllUsers() {
@@ -209,8 +171,58 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
         return users;
     }
 
-    public void insertUser(User users) {
+    public User checkUser(String user) {
+
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT " + User.COL_USER + " FROM " + User.TABLE_NAME + " WHERE " + User.COL_USER + " = '" + user + "'", new String[]{String.valueOf(user)});
+
+        int id = getCursorInt(cursor, User._ID);
+        String  foundUser =(getCursorString(cursor, User.COL_USER));
+        cursor.close();
+        return new User(foundUser,id);
+    }
+
+    public void getPinsForUsers(){
+        String sql="SELECT"+User.COL_USER+", " + TABLE_NAME + ".* " +
+                "FROM " + TABLE_NAME + " INNER JOIN " + User.TABLE_NAME +
+                " ON " + TABLE_NAME + "." + COL_LAT + " LIKE " + User.TABLE_NAME + "." + User.COL_PINS;
+
+        Log.d("getPinsForUsers", sql);
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+
+        while (cursor.moveToNext()) {
+            String builder = getCursorString(cursor, User.COL_PINS) +
+                    " goes to " +
+                    getCursorString(cursor, COL_LAT) +
+                    " : " +
+                    getCursorString(cursor, COL_LONG);
+            Log.d("getPinsForUsers", builder);
+        }
+
+        cursor.close();
+
+    }
+
+
+    public void insertUser(User users) throws SQLiteConstraintException {
         getWritableDatabase().insert(User.TABLE_NAME, null, users.getUserValues());
     }
 
+    public void insertPin(Pins pin) {
+        getWritableDatabase().insert(Pins.TABLE_NAME, null, pin.getPinValues());
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE " + User.TABLE_NAME);
+        db.execSQL("DROP TABLE " + TABLE_NAME);
+        onCreate(db);
+    }
+
+    public String getCursorString(Cursor cursor, String columnName) {
+        return cursor.getString(cursor.getColumnIndex(columnName));
+    }
+
+    public int getCursorInt(Cursor cursor, String columnName) {
+        return cursor.getInt(cursor.getColumnIndex(columnName));
+    }
 }

@@ -24,7 +24,7 @@ public class User implements BaseColumns{
     private ArrayList<User> mUsers;
 
 
-    public User(String user){
+    public User(String user,int id){
         mUserName=user;
     }
 

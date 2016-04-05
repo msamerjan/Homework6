@@ -8,8 +8,8 @@ import android.provider.BaseColumns;
  */
 public class Pins implements BaseColumns{
 
-    private int mID;
-    private String mTitle,mDescription,mLatitude,mLongitude;
+    private int mID, mLatitude,mLongitude;
+    private String mTitle,mDescription;
     private User mUser;
 
     public static final String TABLE_NAME="Pin Position";
@@ -21,7 +21,7 @@ public class Pins implements BaseColumns{
     public static final String CREATE_TABLE="CREATE TABLE"+TABLE_NAME+"("+_ID+"TEXT PRIMARY KEY,"+
             COL_LONG+"INT,"+COL_LAT+"INT )";
 
-    public Pins(String latitude,String longitude,int ID,String title, String description){
+    public Pins(int latitude,int longitude,int ID,String title, String description){
         mLatitude=latitude;
         mLongitude=longitude;
         mID=ID;
@@ -34,11 +34,11 @@ public class Pins implements BaseColumns{
         mTitle=title;
     }
 
-    public String getLatitude(){
+    public int getLatitude(){
         return mLatitude;
     }
 
-    public String getLongitude(){
+    public int getLongitude(){
         return mLongitude;
     }
 
