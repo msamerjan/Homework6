@@ -39,14 +39,14 @@
         android:orientation="horizontal">
 
     <Button
-        android:id="@+id/fragment_main_login_button"
+        android:id="@+id/fragment_login_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/fragment_login_button_text"
         tools:ignore="ButtonStyle"/>
     <Button
-        android:id="@+id/fragment_main_add_user_button"
+        android:id="@+id/fragment_add_user_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
