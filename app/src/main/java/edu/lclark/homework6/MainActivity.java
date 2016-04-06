@@ -53,10 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onPinCreated(Pins pin){
-    }
-
-    @Override
-    public void onDuplicateUser(){
+        Pins mPin=mapSQLiteHelper.getAllPins();
 
     }
+
 }

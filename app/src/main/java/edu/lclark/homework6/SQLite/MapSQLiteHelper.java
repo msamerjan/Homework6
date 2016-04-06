@@ -161,8 +161,7 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
             do {
                 int id = getCursorInt(cursor, User._ID);
                 String name = getCursorString(cursor, User.COL_USER);
-                int numPins = getCursorInt(cursor, User.COL_PINS);
-                users.add(new User(id, name, numPins));
+                users.add(new User(id, name));
             } while (cursor.moveToNext());
 
         }

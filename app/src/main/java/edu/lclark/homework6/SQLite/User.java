@@ -28,10 +28,9 @@ public class User implements BaseColumns{
         mUserName=user;
     }
 
-    public User(int id,String user,int pins){
+    public User(int id,String user){
         mID=id;
         mUserName=user;
-        mPins=pins;
     }
 
 
