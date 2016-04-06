@@ -18,13 +18,13 @@ public class User implements BaseColumns{
 
     public static final String CREATE_TABLE="CREATE TABLE " + User.TABLE_NAME + " ( " +
             User._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            User._COUNT+ " TEXT, " +
+            User.COL_USER+ " TEXT, " +
             ")";
 
     private ArrayList<User> mUsers;
 
 
-    public User(String user,int id){
+    public User(String user){
         mUserName=user;
     }
 
@@ -42,11 +42,13 @@ public class User implements BaseColumns{
         return mPins;
     }
 
+    public int getmID(){return mID;}
+
 
     public ContentValues getUserValues(){
         ContentValues contentValues= new ContentValues();
         contentValues.put(COL_USER,mUserName);
-        contentValues.put(COL_PINS,mPins);
+        //contentValues.put(COL_PINS,mPins);
         return contentValues;
     }
 }

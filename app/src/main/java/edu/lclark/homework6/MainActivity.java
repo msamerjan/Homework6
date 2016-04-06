@@ -3,14 +3,12 @@ package edu.lclark.homework6;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.lclark.homework6.Fragments.LoginFragment;
 import edu.lclark.homework6.SQLite.MapSQLiteHelper;
-import edu.lclark.homework6.SQLite.Pins;
 import edu.lclark.homework6.SQLite.User;
 
 /**
@@ -37,24 +35,5 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-
-    public User onUserCreated(User user){
-        User foundUser = mapSQLiteHelper.checkUser(user.getUser());
-
-        if (foundUser == null) {
-            Log.d(TAG, "User not found");
-            mapSQLiteHelper.insertUser(user);
-            foundUser = mapSQLiteHelper.checkUser(user.getUser());
-        } else {
-            Log.d(TAG, foundUser.toString());
-        }
-        return foundUser;
-    }
-
-    @Override
-    public void onPinCreated(Pins pin){
-        Pins mPin=mapSQLiteHelper.getAllPins();
-
-    }
 
 }

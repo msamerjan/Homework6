@@ -1,9 +1,9 @@
 package edu.lclark.homework6.Fragments;
 
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.lclark.homework6.R;
 import edu.lclark.homework6.SQLite.MapSQLiteHelper;
+import edu.lclark.homework6.SQLite.Pins;
 import edu.lclark.homework6.SQLite.User;
 
 public class LoginFragment extends Fragment {
@@ -39,6 +41,8 @@ public class LoginFragment extends Fragment {
     Button mLoginButton;
 
     private MapSQLiteHelper mapSQLiteHelper;
+    private User mUser;
+    private LatLng position;
 
 
 
@@ -59,13 +63,43 @@ public class LoginFragment extends Fragment {
         return rootView;
     }
 
+    public void onLogin(User user){
+        User foundUser = mapSQLiteHelper.checkUser(user.getUser());
+
+        if (foundUser == null) {
+            Log.d(TAG, "User not found");
+            mapSQLiteHelper.insertUser(user);
+            foundUser = mapSQLiteHelper.checkUser(user.getUser());
+        } else {
+            Log.d(TAG, foundUser.toString());
+        }
+        mUser=foundUser;
+    }
+
+    public void onAdd(User user){
+        mapSQLiteHelper.addOrUpdateUser(user);
+
+    }
+
+    public void onPinCreated(Pins pin){
+        pin.setLatitude(position.latitude);
+        pin.setLongitude(position.longitude);
+        pin.setUserID(mUser.getmID());
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.activity_main_framelayout);
+        mapFragment.savedPins(pin);
+        mapSQLiteHelper.insertPin(pin);
+
+    }
+
     @OnClick(R.id.fragment_login_button)
     public void searchUser(User user) {
         String user1 = mUserEditText.getText().toString().trim();
-        if (user1.equals("")) {
+        if (user1.isEmpty()) {
             Toast toast = Toast.makeText(getActivity(), R.string.no_entry, Toast.LENGTH_SHORT);
             toast.show();
-        } else if (user1.equals("maia")) {
+        } else {
+            user=new User(user1);
+            onLogin(user);
             Toast toast = Toast.makeText(getActivity(), R.string.user_not_found, Toast.LENGTH_LONG);
             toast.show();
 
@@ -77,16 +111,11 @@ public class LoginFragment extends Fragment {
     @OnClick(R.id.fragment_add_user_button)
         public void addUser(User user){
             String user2 = mUserEditText.getText().toString().trim();
-            if (user2.equals("")) {
+            if (user2.isEmpty()) {
                 Toast toast = Toast.makeText(getActivity(), R.string.no_entry, Toast.LENGTH_SHORT);
                 toast.show();
             } else {
-                try {
-                mapSQLiteHelper.insertUser(user);
-            } catch (SQLiteConstraintException e) {
-                Toast toast= Toast.makeText(getActivity(), R.string.duplicate_entry, Toast.LENGTH_SHORT);
-                toast.show();
-            }
+                onAdd(user);
                 launchMap();
             }
         }

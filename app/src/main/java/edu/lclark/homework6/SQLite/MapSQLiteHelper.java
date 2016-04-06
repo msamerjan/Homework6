@@ -3,7 +3,6 @@ package edu.lclark.homework6.SQLite;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static edu.lclark.homework6.SQLite.Pins.COL_DESCRIPTION;
+import static edu.lclark.homework6.SQLite.Pins.COL_ID;
 import static edu.lclark.homework6.SQLite.Pins.COL_LAT;
 import static edu.lclark.homework6.SQLite.Pins.COL_LONG;
 import static edu.lclark.homework6.SQLite.Pins.COL_TITLE;
@@ -139,9 +139,10 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
                 int id = getCursorInt(cursor, _ID);
                 String title = getCursorString(cursor, COL_TITLE);
                 String description = getCursorString(cursor, COL_DESCRIPTION);
-                int latitude=getCursorInt(cursor, COL_LAT);
-                int longitude=getCursorInt(cursor,COL_LONG);
-                pins.add(new Pins(latitude, longitude,id,title,description));
+                double latitude=getCursorInt(cursor, COL_LAT);
+                double longitude=getCursorInt(cursor, COL_LONG);
+                int userID=getCursorInt(cursor,COL_ID);
+                pins.add(new Pins(userID,latitude, longitude,id,title,description));
             } while (cursor.moveToNext());
 
         }
@@ -178,7 +179,7 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
         int id = getCursorInt(cursor, User._ID);
         String  foundUser =(getCursorString(cursor, User.COL_USER));
         cursor.close();
-        return new User(foundUser,id);
+        return new User(foundUser);
     }
 
     public void getPinsForUsers(){
@@ -203,7 +204,7 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
     }
 
 
-    public void insertUser(User users) throws SQLiteConstraintException {
+    public void insertUser(User users) {
         getWritableDatabase().insert(User.TABLE_NAME, null, users.getUserValues());
     }
 
@@ -224,5 +225,20 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
 
     public int getCursorInt(Cursor cursor, String columnName) {
         return cursor.getInt(cursor.getColumnIndex(columnName));
+    }
+
+    public void deleteAllPostsAndUsers() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            // Order of deletions is important when foreign key relationships exist.
+            db.delete(Pins.TABLE_NAME, null, null);
+            db.delete(User.TABLE_NAME, null, null);
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to delete all posts and users");
+        } finally {
+            db.endTransaction();
+        }
     }
 }

@@ -8,7 +8,8 @@ import android.provider.BaseColumns;
  */
 public class Pins implements BaseColumns{
 
-    private int mID, mLatitude,mLongitude;
+    private int mID,mUserID;
+    private double  mLatitude,mLongitude;
     private String mTitle,mDescription;
     private User mUser;
 
@@ -17,11 +18,12 @@ public class Pins implements BaseColumns{
     public static final String COL_DESCRIPTION="Description";
     public static final String COL_LONG="longitude";
     public static final String COL_LAT="latitude";
-
+    public static final String COL_ID="ID";
     public static final String CREATE_TABLE="CREATE TABLE"+TABLE_NAME+"("+_ID+"TEXT PRIMARY KEY,"+
             COL_LONG+"INT,"+COL_LAT+"INT )";
 
-    public Pins(int latitude,int longitude,int ID,String title, String description){
+    public Pins(int UserID,double latitude,double longitude,int ID,String title, String description){
+        mUserID=UserID;
         mLatitude=latitude;
         mLongitude=longitude;
         mID=ID;
@@ -34,11 +36,11 @@ public class Pins implements BaseColumns{
         mTitle=title;
     }
 
-    public int getLatitude(){
+    public double getLatitude(){
         return mLatitude;
     }
 
-    public int getLongitude(){
+    public double getLongitude(){
         return mLongitude;
     }
 
@@ -49,8 +51,19 @@ public class Pins implements BaseColumns{
     return mTitle;
     }
 
-    public User getUser(){
-        return mUser;
+    public User getUser(){return mUser;}
+
+    public void setLatitude(double mLatitude){
+        this.mLatitude=mLatitude;
+
+    }
+    public void setLongitude(double mLongitude){
+        this.mLongitude=mLongitude;
+
+    }
+
+    public void setUserID(int mUserID){
+        this.mUserID=mUserID;
     }
 
 

@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.Bind;
 import edu.lclark.homework6.R;
+import edu.lclark.homework6.SQLite.Pins;
 import edu.lclark.homework6.SQLite.User;
 
 /**
@@ -48,18 +49,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
 
     @Override
     public void onMapClick(LatLng point) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.show(mDialogFragment);
-        transaction.commit();
-
         mMap.addMarker(new MarkerOptions()
                 .position(point)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title("Title").snippet("Description")
                 .draggable(true));
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 3));
-    }
 
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.show(mDialogFragment);
+        transaction.commit();
+    }
+public void savedPins(Pins pin){
+
+}
 
     @Override
     public void onResume() {
