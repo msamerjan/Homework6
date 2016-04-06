@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.SupportMapFragment;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -75,21 +73,6 @@ public class LoginFragment extends Fragment {
             launchMap();
         }
 
-
-        User foundUser = mapSQLiteHelper.checkUser(user.getUser());
-
-        if (foundUser == null) {
-            Log.d(TAG, "User not found");
-            mapSQLiteHelper.insertUser(user);
-            foundUser = mapSQLiteHelper.checkUser(user.getUser());
-        } else {
-            Log.d(TAG, foundUser.toString());
-        }
-
-        // TODO: launch fragment with user
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_main_framelayout, new SupportMapFragment());
-        transaction.commit();
     }
     @OnClick(R.id.fragment_add_user_button)
         public void addUser(User user){

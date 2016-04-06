@@ -171,6 +171,7 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
         return users;
     }
 
+
     public User checkUser(String user) {
 
         Cursor cursor = getReadableDatabase().rawQuery("SELECT " + User.COL_USER + " FROM " + User.TABLE_NAME + " WHERE " + User.COL_USER + " = '" + user + "'", new String[]{String.valueOf(user)});
