@@ -42,6 +42,13 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
         transaction.replace(R.id.activity_main_framelayout, new LoginFragment());
         transaction.commit();
     }
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }*/
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         mUser = null;
