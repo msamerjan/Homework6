@@ -41,7 +41,7 @@ public class AddPinDialogFragment extends DialogFragment {
 
         AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setView(rootView)
-                .setTitle(getActivity().getString(R.string.new_user))
+                .setTitle(getActivity().getString(R.string.new_pin))
                 .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             @Override

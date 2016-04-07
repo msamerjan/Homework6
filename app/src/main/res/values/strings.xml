@@ -14,4 +14,5 @@
     <string name="fragment_login_image_description">The World</string>
     <string name="duplicate_entry">Duplicate entry</string>
     <string name="google_map_key">AIzaSyBUxbFSC6XE3y_OlV7RGn1fQ_HpHMY9RiM</string>
+    <string name="new_pin">New Pin</string>
 </resources>

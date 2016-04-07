@@ -210,11 +210,10 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
         return cursor.getInt(cursor.getColumnIndex(columnName));
     }
 
-    public void deleteAllPostsAndUsers() {
+    public void deleteAllPinsAndUsers() {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         try {
-            // Order of deletions is important when foreign key relationships exist.
             db.delete(Pins.TABLE_NAME, null, null);
             db.delete(User.TABLE_NAME, null, null);
             db.setTransactionSuccessful();
@@ -224,4 +223,16 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
             db.endTransaction();
         }
     }
+
+    /*public void initializePins(SQLiteDatabase database) {
+
+        database.beginTransaction();
+
+        ArrayList<Pins> pins = getAllPins(User._ID);
+        for (Pins pin : pins) {
+            database.insert(Pins.TABLE_NAME, null, pin.getPinValues());
+        }
+        database.setTransactionSuccessful();
+        database.endTransaction();
+    }*/
 }

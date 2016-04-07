@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
 
     @Override
     public void onAdd(User user){
-        mapSQLiteHelper.insertUser(user);
+        mapSQLiteHelper.addOrUpdateUser(user);
     }
 
 
