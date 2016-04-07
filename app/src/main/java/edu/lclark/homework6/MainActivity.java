@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
     private MapSQLiteHelper mapSQLiteHelper;
     private LatLng position;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,16 +47,17 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
 
     @Override
     public void onLogin(User user){
-        User foundUser= mapSQLiteHelper.checkUser(user.getUser());
+        Log.d(getClass().getSimpleName(), "Created -- " + user.toString());
+        //User foundUser= mapSQLiteHelper.checkUser(user.getUser());
 
-        if (foundUser == null) {
-            Log.d(TAG, "User not found");
-        } else {
+        //if (foundUser == null) {
+          //  Log.d(TAG, "User not found");
+        //} else {
             mapSQLiteHelper.insertUser(user);
-            foundUser = mapSQLiteHelper.checkUser(user.getUser());
-           Log.d(TAG, foundUser.toString());
-        }
-        mUser=foundUser;
+            //foundUser = mapSQLiteHelper.checkUser(user.getUser());
+           //Log.d(TAG, foundUser.toString());
+        //}
+        //mUser=foundUser;
     }
 
     @Override
