@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
 
     private User mUser;
     private MapSQLiteHelper mapSQLiteHelper;
-    private LatLng position;
+    private LatLng place;
 
 
 
@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
 
     @Override
     public void onLocationCreated(Pins pin){
-        pin.setLatitude(position.latitude);
-        pin.setLongitude(position.longitude);
+        pin.setLatitude(place.latitude);
+        pin.setLongitude(place.longitude);
         pin.setUserID(mUser.getmID());
         MapFragment mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.activity_main_framelayout);
         mapFragment.savedPins(pin);
