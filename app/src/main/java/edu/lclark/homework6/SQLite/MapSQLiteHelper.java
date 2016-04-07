@@ -15,7 +15,6 @@ import static edu.lclark.homework6.SQLite.Pins.COL_ID;
 import static edu.lclark.homework6.SQLite.Pins.COL_LAT;
 import static edu.lclark.homework6.SQLite.Pins.COL_LONG;
 import static edu.lclark.homework6.SQLite.Pins.COL_TITLE;
-import static edu.lclark.homework6.SQLite.Pins.CREATE_TABLE;
 import static edu.lclark.homework6.SQLite.Pins.TABLE_NAME;
 import static edu.lclark.homework6.SQLite.Pins._ID;
 
@@ -51,7 +50,7 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE);
+       // db.execSQL(CREATE_TABLE);
 
         db.execSQL(User.CREATE_TABLE);
 
