@@ -46,8 +46,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
 
     }
     public static Fragment newInstance(User user) {
-        Bundle args = new Bundle();
         MapFragment fragment = new MapFragment();
+        Bundle args = new Bundle();
         args.putParcelable(ARG_USER, user);
         fragment.setArguments(args);
         return fragment;

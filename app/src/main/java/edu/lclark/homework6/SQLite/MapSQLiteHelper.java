@@ -179,8 +179,8 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
     }
 
     public void getPinsForUsers(){
-        String sql="SELECT"+User.COL_USER+", " + TABLE_NAME + ".* " +
-                "FROM " + TABLE_NAME + " INNER JOIN " + User.TABLE_NAME +
+        String sql="SELECT "+ User.COL_USER + " , " + TABLE_NAME + "." + "*"+
+                " FROM " + TABLE_NAME + " INNER JOIN " + User.TABLE_NAME +
                 " ON " + TABLE_NAME + "." + COL_LAT + " LIKE " + User.TABLE_NAME + "." + User.COL_PINS;
 
         Log.d("getPinsForUsers", sql);
@@ -211,7 +211,7 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE " + User.TABLE_NAME);
-        db.execSQL("DROP TABLE " + TABLE_NAME);
+        db.execSQL("DROP TABLE " + Pins.TABLE_NAME);
         onCreate(db);
     }
 
