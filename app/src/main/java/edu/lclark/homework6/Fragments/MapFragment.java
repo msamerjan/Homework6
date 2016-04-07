@@ -100,5 +100,4 @@ public void savedPins(Pins pin) {
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-
 }
