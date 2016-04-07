@@ -25,17 +25,17 @@ public class AddPinDialogFragment extends DialogFragment {
     EditText mLocationDescription;
 
 
-    public interface UserCreatedListener {
+    public interface PinCreatedListener {
         void onLocationCreated(Pins pin);
     }
 
-    private UserCreatedListener mListener;
+    private PinCreatedListener mListener;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        mListener = (UserCreatedListener) getActivity();
+        mListener = (PinCreatedListener) getActivity();
 
         View rootView = LayoutInflater.from(getActivity()).inflate(R.layout.pin_detail_dialogfragment, null);
 

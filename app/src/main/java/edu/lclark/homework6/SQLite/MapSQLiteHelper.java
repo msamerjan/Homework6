@@ -77,12 +77,8 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
 
         db.beginTransaction();
         try {
-
             long userId = addOrUpdateUser(pin.getUser());
-
            ContentValues values= pin.getPinValues();
-
-
             db.insertOrThrow(TABLE_NAME, null, values);
             db.setTransactionSuccessful();
         } catch (Exception e) {

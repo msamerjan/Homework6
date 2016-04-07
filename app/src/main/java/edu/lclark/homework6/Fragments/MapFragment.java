@@ -2,7 +2,6 @@ package edu.lclark.homework6.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
 
     private GoogleMap mMap;
     private AddPinDialogFragment mDialogFragment;
-    private User user;
+    private LatLng position;
+    private User mUser;
+    public static final String ARG_USER = "MapFragment.ArgUser";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -56,13 +58,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 3));
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.show(mDialogFragment);
-        transaction.commit();
+        mDialogFragment = new AddPinDialogFragment();
+        mDialogFragment.show(getFragmentManager(), "dialog");
     }
-public void savedPins(Pins pin){
+public void savedPins(Pins pin) {
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(pin.getLatitude(), pin.getLongitude()))
+                .draggable(false)
+                .title(pin.getTitle())
+                .snippet(pin.getDescription()));
+    }
 
-}
 
     @Override
     public void onResume() {
@@ -87,7 +93,5 @@ public void savedPins(Pins pin){
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-
-
 
 }
