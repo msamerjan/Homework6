@@ -59,18 +59,6 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
 
     }
 
-    /*public void initialize(SQLiteDatabase database) {
-
-        database.beginTransaction();
-
-        ArrayList<Pins> pins = Pins.getAllPins();
-        for (Pins pins1 : pins) {
-            database.insert(Pins.TABLE_NAME, null, pins1.getContentValues());
-        }
-        database.setTransactionSuccessful();
-        database.endTransaction();
-    }*/
-
 
     public void addPin(Pins pin) {
         SQLiteDatabase db = getWritableDatabase();
