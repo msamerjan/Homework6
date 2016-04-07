@@ -59,6 +59,7 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
     }
 
 
+
     public void addPin(Pins pin) {
         SQLiteDatabase db = getWritableDatabase();
 
