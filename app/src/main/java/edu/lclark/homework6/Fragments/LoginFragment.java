@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,17 +57,14 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.login_fragment_layout, container, false);
         ButterKnife.bind(this, rootView);
-        userCreated = (UserCreatedListener) getActivity();
-        ButterKnife.bind(this, rootView);
-        return rootView;
 
-       /* getActivity().setTitle(getActivity().getString(R.string.sign_in));
+        getActivity().setTitle(getActivity().getString(R.string.sign_in));
         Picasso.with(getActivity()).load(APP_LOGO).fit().centerInside().into(mImageView);
 
         userCreated = (UserCreatedListener) getActivity();
         loginCreated = (UserLoginListener) getActivity();
 
-        return rootView;*/
+        return rootView;
     }
 
     @OnClick(R.id.fragment_login_button)

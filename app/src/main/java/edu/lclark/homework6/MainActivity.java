@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }*/
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
         transaction.commit();
 
         return true;
-    }
+    }*/
 
     @Override
     public void onLogin(User user){

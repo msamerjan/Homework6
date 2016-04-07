@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import edu.lclark.homework6.R;
 import edu.lclark.homework6.SQLite.Pins;
 import edu.lclark.homework6.SQLite.User;
@@ -36,8 +37,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        return inflater.inflate(R.layout.maps_activity,container,false);
+        View rootView = inflater.inflate(R.layout.main_activity, container, false);
+        ButterKnife.bind(this, rootView);
+        mMapView.onCreate(savedInstanceState);
+        mMapView.getMapAsync(this);
+        return rootView;
 
     }
     public static Fragment newInstance(User user) {
@@ -54,6 +58,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
         LatLng point = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(point));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
+        mMap.setOnMapClickListener(this);
     }
 
     @Override
