@@ -19,6 +19,7 @@ public class Pins implements BaseColumns{
     public static final String COL_LONG="longitude";
     public static final String COL_LAT="latitude";
     public static final String COL_ID="ID";
+
     public static final String CREATE_TABLE="CREATE TABLE "+ TABLE_NAME + " ( " + _ID + " TEXT PRIMARY KEY, " +
             COL_LONG + " REAL, " + COL_LAT + " REAL, " + COL_TITLE + " TEXT, " +
             COL_DESCRIPTION + " TEXT, " + COL_ID + " TEXT )";

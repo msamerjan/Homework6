@@ -18,10 +18,9 @@ public class User implements BaseColumns,Parcelable {
     public static final String COL_USER="username";
     public static final String COL_PINS="number of pins";
 
-    public static final String CREATE_TABLE="CREATE TABLE " + User.TABLE_NAME + " ( " +
-            User._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            User.COL_USER+ " TEXT, " +
-            ")";
+    public static final String CREATE_TABLE="CREATE TABLE " + User.TABLE_NAME + "(" +
+            User._ID + " TEXT PRIMARY KEY, " +
+            User.COL_USER + " TEXT)";
 
     private ArrayList<User> mUsers;
 
