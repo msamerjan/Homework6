@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,7 +41,8 @@ public class LoginFragment extends Fragment {
     private User mUser;
     private LatLng position;
 
-
+    private UserCreatedListener userCreated;
+    private UserLoginListener loginCreated;
 
     public interface UserCreatedListener{
         void onAdd(User user);
@@ -52,21 +52,21 @@ public class LoginFragment extends Fragment {
         void onLogin(User user);
     }
 
-    private UserCreatedListener userCreated;
-    private UserLoginListener loginCreated;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.login_fragment_layout, container, false);
         ButterKnife.bind(this, rootView);
+        userCreated = (UserCreatedListener) getActivity();
+        ButterKnife.bind(this, rootView);
+        return rootView;
 
-        getActivity().setTitle(getActivity().getString(R.string.sign_in));
+       /* getActivity().setTitle(getActivity().getString(R.string.sign_in));
         Picasso.with(getActivity()).load(APP_LOGO).fit().centerInside().into(mImageView);
 
         userCreated = (UserCreatedListener) getActivity();
         loginCreated = (UserLoginListener) getActivity();
 
-        return rootView;
+        return rootView;*/
     }
 
     @OnClick(R.id.fragment_login_button)
@@ -90,7 +90,7 @@ public class LoginFragment extends Fragment {
                 Toast toast = Toast.makeText(getActivity(), R.string.no_entry, Toast.LENGTH_SHORT);
                 toast.show();
             } else {
-                mUser=new User(user2);
+                mUser = new User(user2);
                 userCreated.onAdd(mUser);
                 launchMap(mUser);
             }
