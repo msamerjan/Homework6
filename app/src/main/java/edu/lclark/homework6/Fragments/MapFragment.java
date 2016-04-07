@@ -33,6 +33,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
     private LatLng position;
     private User mUser;
     public static final String ARG_USER = "MapFragment.ArgUser";
+    private String mUserLogin="maia";
 
 
     @Override

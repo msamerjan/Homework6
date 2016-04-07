@@ -3,7 +3,6 @@ package edu.lclark.homework6;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -42,36 +41,19 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
         transaction.commit();
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        mUser = null;
-        position = null;
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_main_framelayout, new LoginFragment());
-        transaction.commit();
-
-        return true;
-    }*/
 
     @Override
     public void onLogin(User user){
-        User foundUser = mapSQLiteHelper.checkUser(user.getUser());
+        /*User foundUser= mapSQLiteHelper.checkUser(user.getUser());
 
         if (foundUser == null) {
             Log.d(TAG, "User not found");
-        } else {
+        } else {*/
             mapSQLiteHelper.insertUser(user);
-            foundUser = mapSQLiteHelper.checkUser(user.getUser());
-            Log.d(TAG, foundUser.toString());
-        }
-        mUser=foundUser;
+            //foundUser = mapSQLiteHelper.checkUser(user.getUser());
+           // Log.d(TAG, foundUser.toString());
+        //}
+       // mUser=foundUser;
     }
 
     @Override

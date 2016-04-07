@@ -18,7 +18,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.lclark.homework6.R;
-import edu.lclark.homework6.SQLite.MapSQLiteHelper;
 import edu.lclark.homework6.SQLite.User;
 
 public class LoginFragment extends Fragment {
@@ -38,10 +37,8 @@ public class LoginFragment extends Fragment {
     @Bind(R.id.fragment_login_button)
     Button mLoginButton;
 
-    private MapSQLiteHelper mapSQLiteHelper;
     private User mUser;
     private LatLng position;
-
     private UserCreatedListener userCreated;
     private UserLoginListener loginCreated;
 
