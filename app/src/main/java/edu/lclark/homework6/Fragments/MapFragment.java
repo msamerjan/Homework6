@@ -38,7 +38,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.main_activity, container, false);
+        View rootView = inflater.inflate(R.layout.maps_activity, container, false);
         ButterKnife.bind(this, rootView);
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
@@ -56,14 +56,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng point = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(point));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
         mMap.setOnMapClickListener(this);
     }
 
     @Override
     public void onMapClick(LatLng point) {
+
         mMap.addMarker(new MarkerOptions()
                 .position(point)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)).title("Title").snippet("Description")

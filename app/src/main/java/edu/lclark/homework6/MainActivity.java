@@ -3,7 +3,6 @@ package edu.lclark.homework6;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -47,14 +46,13 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
 
     @Override
     public void onLogin(User user){
-        Log.d(getClass().getSimpleName(), "Created -- " + user.toString());
-        //User foundUser= mapSQLiteHelper.checkUser(user.getUser());
+       // User foundUser= mapSQLiteHelper.checkUser(user.getUser());
 
         //if (foundUser == null) {
           //  Log.d(TAG, "User not found");
         //} else {
             mapSQLiteHelper.insertUser(user);
-            //foundUser = mapSQLiteHelper.checkUser(user.getUser());
+          //  foundUser = mapSQLiteHelper.checkUser(user.getUser());
            //Log.d(TAG, foundUser.toString());
         //}
         //mUser=foundUser;

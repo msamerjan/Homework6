@@ -50,7 +50,7 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-       // db.execSQL(CREATE_TABLE);
+        db.execSQL(Pins.CREATE_TABLE);
 
         db.execSQL(User.CREATE_TABLE);
 
