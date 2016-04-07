@@ -75,10 +75,10 @@ public class LoginFragment extends Fragment {
         if (user1.isEmpty()) {
             Toast toast = Toast.makeText(getActivity(), R.string.no_entry, Toast.LENGTH_SHORT);
             toast.show();
-        } else {
+        } else{
             mUser = new User(user1);
             loginCreated.onLogin(mUser);
-
+            launchMap(mUser);
 
         }
 
@@ -92,14 +92,15 @@ public class LoginFragment extends Fragment {
             } else {
                 mUser=new User(user2);
                 userCreated.onAdd(mUser);
+                launchMap(mUser);
             }
         }
 
 
 
-    public void launchMap(){
+    public void launchMap(User user){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_main_framelayout, new MapFragment());
+        transaction.replace(R.id.activity_main_framelayout,MapFragment.newInstance(user));
         transaction.commit();
     }
 

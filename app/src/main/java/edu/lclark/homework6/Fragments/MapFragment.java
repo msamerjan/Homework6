@@ -40,7 +40,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
         return inflater.inflate(R.layout.maps_activity,container,false);
 
     }
-    public static MapFragment newInstance(User user) {
+    public static Fragment newInstance(User user) {
         Bundle args = new Bundle();
         MapFragment fragment = new MapFragment();
         args.putParcelable(ARG_USER, user);

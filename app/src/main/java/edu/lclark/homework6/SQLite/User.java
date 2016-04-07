@@ -42,6 +42,7 @@ public class User implements BaseColumns,Parcelable {
         mUsers = in.createTypedArrayList(User.CREATOR);
     }
 
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mUserName);

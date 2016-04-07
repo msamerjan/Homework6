@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
 
         if (foundUser == null) {
             Log.d(TAG, "User not found");
+        } else {
             mapSQLiteHelper.insertUser(user);
             foundUser = mapSQLiteHelper.checkUser(user.getUser());
-        } else {
             Log.d(TAG, foundUser.toString());
         }
         mUser=foundUser;
@@ -78,8 +78,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
     @Override
     public void onAdd(User user){
         mapSQLiteHelper.addOrUpdateUser(user);
-
     }
+
+
 
     @Override
     public void onLocationCreated(Pins pin){
