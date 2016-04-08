@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.lclark.homework6.R;
-import edu.lclark.homework6.SQLite.Pins;
 import edu.lclark.homework6.SQLite.User;
 
 /**
@@ -73,13 +72,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,OnMapCli
         mDialogFragment = new AddPinDialogFragment();
         mDialogFragment.show(getFragmentManager(), "dialog");
     }
-public void savedPins(Pins pin) {
+
+
+      /*  public void savedPins(Pins pin) {
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(pin.getLatitude(), pin.getLongitude()))
                 .draggable(false)
                 .title(pin.getTitle())
                 .snippet(pin.getDescription()));
-    }
+    }*/
 
 
     @Override
