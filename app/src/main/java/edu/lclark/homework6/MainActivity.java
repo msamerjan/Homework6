@@ -46,16 +46,16 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Use
 
     @Override
     public void onLogin(User user){
-       // User foundUser= mapSQLiteHelper.checkUser(user.getUser());
+       /*User foundUser= mapSQLiteHelper.checkUser(user.getUser());
 
-        //if (foundUser == null) {
-          //  Log.d(TAG, "User not found");
-        //} else {
+        if (foundUser == null) {
+           Log.d(TAG, "User not found");
+        } else {*/
             mapSQLiteHelper.insertUser(user);
-          //  foundUser = mapSQLiteHelper.checkUser(user.getUser());
-           //Log.d(TAG, foundUser.toString());
-        //}
-        //mUser=foundUser;
+            /*foundUser = mapSQLiteHelper.checkUser(user.getUser());
+            Log.d(TAG, foundUser.toString());
+        }
+        mUser=foundUser;*/
     }
 
     @Override

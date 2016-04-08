@@ -156,15 +156,17 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
     }
 
 
-    public User checkUser(String user) {
+    /*public User checkUser(String user) {
 
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT " + User.COL_USER + " FROM " + User.TABLE_NAME + " WHERE " + User.COL_USER + " = '" + user + "'", new String[]{String.valueOf(user)});
-
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT " + User.COL_USER + " FROM " + User.TABLE_NAME + " WHERE name = ? LIMIT 1 " , new String[]{String.valueOf(user)});
+        if (!cursor.moveToFirst()) {
+            return null;
+        }
         int id = getCursorInt(cursor, User._ID);
         String  foundUser =(getCursorString(cursor, User.COL_USER));
         cursor.close();
-        return new User(foundUser);
-    }
+        return new User(id,foundUser);
+    }*/
 
     public void getPinsForUsers(){
         String sql="SELECT "+ User.COL_USER + " , " + TABLE_NAME + "." + "*"+
@@ -229,11 +231,10 @@ public class MapSQLiteHelper extends SQLiteOpenHelper{
 
         database.beginTransaction();
 
-        ArrayList<Pins> pins = getAllPins(User._ID);
+        ArrayList<Pins> pins = database.getPinsForUsers();
         for (Pins pin : pins) {
             database.insert(Pins.TABLE_NAME, null, pin.getPinValues());
         }
-        database.setTransactionSuccessful();
-        database.endTransaction();
+
     }*/
 }
